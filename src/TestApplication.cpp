@@ -3,12 +3,13 @@
 TestApplication::TestApplication(int& argc, char** argv)
 : QApplication(argc, argv)
 , serialPort_(new QSerialPort())
+, serialPortPeripheral_(new SerialPortPeripheral(*serialPort_))
 , vehicleData_(new VehicleData())
-, telemetryReporting_(new TelemetryReporting(*serialPort_, *vehicleData_))
-, window_(new Window(*serialPort_, *telemetryReporting_))
+, window_(new Window())
+, view_(new View(*window_))
+, telemetryReporting_(new TelemetryReporting(*serialPort_, *serialPortPeripheral_, *vehicleData_, *view_))
 {
 }
-
-TestApplication::~TestApplication()
+    TestApplication::~TestApplication()
 {
 }

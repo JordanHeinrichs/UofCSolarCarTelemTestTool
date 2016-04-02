@@ -3,11 +3,15 @@
    Copyright (c) 2015 by University of Calgary Solar Car Team
 -------------------------------------------------------*/
 
+#include <QDebug>
 #include <QIODevice>
+#include <QSerialPort>
 #include <CcsDefines.h>
 #include <CrcCalculator.h>
 #include <TelemetryReporting.h>
 #include <VehicleData.h>
+#include <SerialPortPeripheral.h>
+#include <View.h>
 
 union FloatDataUnion
 {
@@ -36,13 +40,21 @@ namespace
    const unsigned char BATTERY_DATA_ID = 0x04;
    const unsigned char CMU_DATA_ID = 0x05;
    const unsigned char MPPT_DATA_ID = 0x06;
+
+   const int NUMBER_OF_CMUS = 4;
+   const int NUMBER_OF_MPPTS = 7;
 }
 
 TelemetryReporting::TelemetryReporting(QIODevice& device,
-                                       VehicleData& vehicleData)
+                                       SerialPortPeripheral& peripheral,
+                                       VehicleData& vehicleData,
+                                       View& view)
 : outputDevice_(device)
+, serialPortPeripheral_(peripheral)
 , vehicleData_(vehicleData)
+, view_(view)
 {
+    connectToView();
 }
 
 void TelemetryReporting::sendKeyDriverControlTelemetry()
@@ -119,7 +131,7 @@ void TelemetryReporting::sendBatteryData()
    sendData(packet, packetLength);
 }
 
-void TelemetryReporting::sendCmuData(unsigned char cmuDataIndex)
+void TelemetryReporting::sendCmu(unsigned char cmuDataIndex)
 {
    const unsigned int unframedPacketLength = CMU_DATA_LENGTH + CHECKSUM_LENGTH;
    unsigned char packetPayload[unframedPacketLength];
@@ -142,7 +154,7 @@ void TelemetryReporting::sendCmuData(unsigned char cmuDataIndex)
    sendData(packet, packetLength);
 }
 
-void TelemetryReporting::sendMpptData(unsigned char mpptDataIndex)
+void TelemetryReporting::sendMppt(unsigned char mpptDataIndex)
 {
    const unsigned int unframedPacketLength = MPPT_DATA_LENGTH + CHECKSUM_LENGTH;
    unsigned char packetPayload[unframedPacketLength];
@@ -240,4 +252,54 @@ void TelemetryReporting::sendData(const unsigned char* data, int length)
    {
       outputDevice_.putChar(data[i]);
    }
+}
+
+void TelemetryReporting::attemptConnection()
+{
+    serialPortPeripheral_.setPortName(view_.getCommunicationPort());
+    view_.setConnectionStatus(serialPortPeripheral_.attemptConnection());
+}
+
+void TelemetryReporting::differentModeSelected()
+{
+    QString testingMode = view_.getModeSelected();
+    qDebug() << testingMode;
+}
+
+void TelemetryReporting::sendCmuData()
+{
+    for (int i = 0; i < NUMBER_OF_CMUS; ++i)
+    {
+       sendCmu(i);
+    }
+}
+
+void TelemetryReporting::sendMpptData()
+{
+    for (int i = 0; i < NUMBER_OF_MPPTS; ++i)
+    {
+       sendMppt(i);
+    }
+}
+
+void TelemetryReporting::sendAll()
+{
+    sendKeyDriverControlTelemetry();
+    sendDriverControlDetails();
+    sendFaults();
+    sendBatteryData();
+    sendCmuData();
+    sendMpptData();
+}
+
+void TelemetryReporting::connectToView()
+{
+    connect(&view_, SIGNAL(attemptConnectionSignal()), this, SLOT(attemptConnection()));
+    connect(&view_, SIGNAL(differentModeSelectedSignal()), this, SLOT(differentModeSelected()));
+    connect(&view_, SIGNAL(sendKeyDriverControlSignal()), this, SLOT(sendKeyDriverControlTelemetry()));
+    connect(&view_, SIGNAL(sendDriverControlDetailsSignal()), this, SLOT(sendDriverControlDetails()));
+    connect(&view_, SIGNAL(sendFaultsSignal()), this, SLOT(sendFaults()));
+    connect(&view_, SIGNAL(sendCmuDataSignal()), this, SLOT(sendCmuData()));
+    connect(&view_, SIGNAL(sendMpptDataSignal()), this, SLOT(sendMpptData()));
+    connect(&view_, SIGNAL(sendAllSignal()), this, SLOT(sendAll()));
 }
