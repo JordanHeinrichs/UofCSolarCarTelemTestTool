@@ -4,11 +4,12 @@
 #include <QObject>
 class QSerialPort;
 class Window;
-class WindowDesign;
 class QPushButton;
 class QComboBox;
 class QLineEdit;
+class QDoubleSpinBox;
 class QLabel;
+class QCheckBox;
 
 class View : public QObject
 {
@@ -21,20 +22,29 @@ public:
 
 private:
     void connectToUi();
-    void connectTest();
-    void setUpWindowDesign();
+
+private slots:
+    void emitSendSignals();
+    void changeKeyDriverControlsData();
 
 signals:
     void attemptConnectionSignal();
-    void differentModeSelectedSignal();
     void sendKeyDriverControlSignal();
     void sendDriverControlDetailsSignal();
     void sendFaultsSignal();
     void sendBatteryDataSignal();
     void sendCmuDataSignal();
     void sendMpptDataSignal();
+    void changeDataSignal(); //remove later
+    void changeKeyDriverControlsSignal(float driverSetSpeed,
+                                       float driverSetCurrent,
+                                       float vehicleVelocity,
+                                       float busCurrent,
+                                       float busVoltage);
+
+    //useless/to-be-removed
+    void differentModeSelectedSignal();
     void sendAllSignal();
-    void changeDataSignal();
 
 
 private:

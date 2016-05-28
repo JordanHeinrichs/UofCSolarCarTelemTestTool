@@ -19,11 +19,10 @@ HEADERS  += \
     DataLayer/CmuData.h \
     DataLayer/MpptData.h \
     DataLayer/VehicleData.h \
-    UILayer/Window.h \
     ViewLayer/View.h \
     Peripherals/SerialPortPeripheral.h \
     BusinessLayer/DataModifier.h \
-    UILayer/WindowDesign.h
+    UILayer/Window.h
 
 
 SOURCES += \
@@ -34,11 +33,10 @@ SOURCES += \
     DataLayer/CmuData.cpp \
     DataLayer/MpptData.cpp \
     DataLayer/VehicleData.cpp \
-    UILayer/Window.cpp \
     ViewLayer/View.cpp \
     Peripherals/SerialPortPeripheral.cpp \
     BusinessLayer/DataModifier.cpp \
-    UILayer/WindowDesign.cpp
+    UILayer/Window.cpp
 
 DISTFILES +=
 

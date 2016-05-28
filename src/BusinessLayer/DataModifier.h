@@ -12,7 +12,14 @@ public:
 
 private:
     void connectToView();
+
+private slots:
     void changeData();
+    void changeKeyDriverControls(float driverSetSpeed,
+                                 float driverSetCurrent,
+                                 float vehicleVelocity,
+                                 float busCurrent,
+                                 float busVoltage);
 
 private:
     View& view_;

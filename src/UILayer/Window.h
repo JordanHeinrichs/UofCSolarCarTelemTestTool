@@ -1,48 +1,44 @@
 #pragma once
 
-#include <QMainWindow>
+//#include <QMainWindow>
+//#include <QWidget>
+#include <QTabWidget>
 class QPushButton;
 class QComboBox;
 class QLineEdit;
+class QDoubleSpinBox;
 class QLabel;
+class QCheckBox;
 
-class Window : public QMainWindow
+namespace Ui{
+    class WindowDesign;
+}
+
+class Window : public QTabWidget
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
-   Window();
-   virtual ~Window();
+    explicit Window();
+    ~Window();
+    QPushButton& getConnectButton();
+    QPushButton& getSendButton();
+    QPushButton& getKeyDriverControlsSubmitButton();
+    QLineEdit& getComPortLineEdit();
+    QLabel& getConnectionStatusLabel();
+    QCheckBox& getSendKeyDriverControlCheckBox();
+    QCheckBox& getSendDriverControlDetailsCheckBox();
+    QCheckBox& getSendFaultsCheckBox();
+    QCheckBox& getSendBatteryDataCheckBox();
+    QCheckBox& getSendCmuDataCheckBox();
+    QCheckBox& getSendMpptDataCheckBox();
+    QDoubleSpinBox& getDriverSetSpeedRpmSpinBox();
+    QDoubleSpinBox& getDriverSetCurrentSpinBox();
+    QDoubleSpinBox& getVehicleVelocitySpinBox();
+    QDoubleSpinBox& getBusCurrentSpinBox();
+    QDoubleSpinBox& getBusVoltageSpinBox();
 
-public:
-   QPushButton& getConnectButton();
-   QLineEdit& getComPortLineEdit();
-   QString& getTestingMode();
-   QComboBox& getModeSelectionComboBox();
-   QLabel& getConnectionStatusLabel();
-   QPushButton& getSendKeyDriverControlButton();
-   QPushButton& getSendFaultsButton();
-   QPushButton& getSendBatteryDataButton();
-   QPushButton& getSendCmuDataButton();
-   QPushButton& getSendMpptDataButton();
-   QPushButton& getSendAllButton();
-   void setConnectionStatusText(QString);
-
-   //void getConnectionStatus
 
 private:
-   void setupUi();
-   void connectPointers();
-
-private:
-   QScopedPointer<QPushButton> connectButton_;
-   QScopedPointer<QLineEdit> comPortLineEdit_;
-   QScopedPointer<QLabel> connectionStatusLabel_;
-   QScopedPointer<QString> testingMode_;
-   QScopedPointer<QPushButton> sendKeyDriverControlButton_;
-   QScopedPointer<QPushButton> sendDriverControlDetailsButton_;
-   QScopedPointer<QPushButton> sendFaultsButton_;
-   QScopedPointer<QPushButton> sendBatteryDataButton_;
-   QScopedPointer<QPushButton> sendCmuDataButton_;
-   QScopedPointer<QPushButton> sendMpptDataButton_;
-   QScopedPointer<QPushButton> sendAllButton_;
+    Ui::WindowDesign *ui;
 };
+

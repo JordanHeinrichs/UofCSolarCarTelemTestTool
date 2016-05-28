@@ -1,114 +1,95 @@
-#include <iostream>
-#include <QString>
-#include <QVBoxLayout>
-#include <QFormLayout>
-#include <QLabel>
-#include <QPushButton>
-#include <QSerialPort>
-#include <QLineEdit>
-#include <QComboBox>
 #include "Window.h"
+#include "ui_WindowDesign.h"
 
 Window::Window()
+: ui(new Ui::WindowDesign)
 {
-   setWindowTitle("Telem Test Program");
-   setupUi();
-   show();
+    ui->setupUi(this);
+    this->setWindowTitle("Telem Test Program");
+    this->show();
 }
 
 Window::~Window()
 {
-}
-
-void Window::setupUi()
-{
-   QWidget* mainWidget = new QWidget(this);
-   QFormLayout* layout = new QFormLayout;
-
-   connectButton_.reset(new QPushButton("&Connect", this));
-   comPortLineEdit_.reset(new QLineEdit("/dev/ttyUSB0", this));
-   connectionStatusLabel_.reset(new QLabel("Not connected", this));
-
-   sendKeyDriverControlButton_.reset(new QPushButton("Send Key Driver Control", this));
-   QPushButton* keyDriverControlDetailsButton = new QPushButton("Details", this);
-
-   sendDriverControlDetailsButton_.reset(new QPushButton("Send Driver Control Details", this));
-   QPushButton* driverControlDetailsButton = new QPushButton("Details", this);
-
-   sendFaultsButton_.reset(new QPushButton("Send Faults", this));
-   QPushButton* faultsDetailsButton = new QPushButton("Details", this);
-
-   sendBatteryDataButton_.reset(new QPushButton("Send Battery Data", this));
-   QPushButton* batteryDataDetailsButton = new QPushButton("Details", this);
-
-   sendCmuDataButton_.reset(new QPushButton("Send Cmu Data", this));
-   QPushButton* cmuDataDetailsButton = new QPushButton("Details", this);
-
-   sendMpptDataButton_.reset(new QPushButton("Send Mppt Data", this));
-   QPushButton* mpptDataDetailsButton = new QPushButton("Details", this);
-
-   sendAllButton_.reset(new QPushButton("Send All", this));
-
-   layout->addRow(connectButton_.data());
-   layout->addRow(comPortLineEdit_.data());
-   layout->addRow(connectionStatusLabel_.data());
-   layout->addRow(keyDriverControlDetailsButton, sendKeyDriverControlButton_.data());
-   layout->addRow(driverControlDetailsButton, sendDriverControlDetailsButton_.data());
-   layout->addRow(faultsDetailsButton, sendFaultsButton_.data());
-   layout->addRow(batteryDataDetailsButton, sendBatteryDataButton_.data());
-   layout->addRow(cmuDataDetailsButton, sendCmuDataButton_.data());
-   layout->addRow(mpptDataDetailsButton, sendMpptDataButton_.data());
-   layout->addRow(sendAllButton_.data());
-   mainWidget->setLayout(layout);
-   setCentralWidget(mainWidget);
+    delete ui;
 }
 
 QPushButton& Window::getConnectButton()
 {
-    return *connectButton_;
+    return *ui->connectButton;
+}
+
+QPushButton& Window::getSendButton()
+{
+    return *ui->sendButton;
+}
+
+QPushButton& Window::getKeyDriverControlsSubmitButton()
+{
+    return *ui->keyDriverControlsSubmitButton;
 }
 
 QLineEdit& Window::getComPortLineEdit()
 {
-    return *comPortLineEdit_;
+    return *ui->comPortLineEdit;
 }
 
 QLabel& Window::getConnectionStatusLabel()
 {
-    return *connectionStatusLabel_;
+    return *ui->displayConnectionStatusLabel;
 }
 
-QString& Window::getTestingMode()
+QCheckBox& Window::getSendKeyDriverControlCheckBox()
 {
-    return *testingMode_;
+    return *ui->sendKeyDriverControlCheckBox;
 }
 
-QPushButton& Window::getSendKeyDriverControlButton()
+QCheckBox& Window::getSendDriverControlDetailsCheckBox()
 {
-    return *sendKeyDriverControlButton_;
+    return *ui->sendDriverControlDetailsCheckBox;
 }
 
-QPushButton& Window::getSendFaultsButton()
+QCheckBox& Window::getSendFaultsCheckBox()
 {
-    return *sendFaultsButton_;
+    return *ui->sendFaultsCheckBox;
 }
 
-QPushButton& Window::getSendBatteryDataButton()
+QCheckBox& Window::getSendBatteryDataCheckBox()
 {
-    return *sendBatteryDataButton_;
+    return *ui->sendBatteryDataCheckBox;
 }
 
-QPushButton& Window::getSendCmuDataButton()
+QCheckBox& Window::getSendCmuDataCheckBox()
 {
-    return *sendCmuDataButton_;
+    return *ui->sendCmuDataCheckBox;
 }
 
-QPushButton& Window::getSendMpptDataButton()
+QCheckBox& Window::getSendMpptDataCheckBox()
 {
-    return *sendMpptDataButton_;
+    return *ui->sendMpptDataCheckBox;
 }
 
-QPushButton& Window::getSendAllButton()
+QDoubleSpinBox& Window::getDriverSetSpeedRpmSpinBox()
 {
-    return *sendAllButton_;
+    return *ui->driverSetSpeedRpmSpinBox;
+}
+
+QDoubleSpinBox& Window::getDriverSetCurrentSpinBox()
+{
+    return *ui->driverSetCurrentSpinBox;
+}
+
+QDoubleSpinBox& Window::getVehicleVelocitySpinBox()
+{
+    return *ui->vehicleVelocitySpinBox;
+}
+
+QDoubleSpinBox& Window::getBusCurrentSpinBox()
+{
+    return *ui->busCurrentSpinBox;
+}
+
+QDoubleSpinBox& Window::getBusVoltageSpinBox()
+{
+    return *ui->busVoltageSpinBox;
 }

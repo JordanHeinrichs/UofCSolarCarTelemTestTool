@@ -264,16 +264,6 @@ void TelemetryReporting::sendAllMpptData()
     }
 }
 
-void TelemetryReporting::sendAll()
-{
-    sendKeyDriverControlTelemetry();
-    sendDriverControlDetails();
-    sendFaults();
-    sendBatteryData();
-    sendAllCmuData();
-    sendAllMpptData();
-}
-
 void TelemetryReporting::connectToView()
 {
     connect(&view_, SIGNAL(attemptConnectionSignal()), this, SLOT(attemptConnection()));
@@ -283,5 +273,4 @@ void TelemetryReporting::connectToView()
     connect(&view_, SIGNAL(sendBatteryDataSignal()), this, SLOT(sendBatteryData()));
     connect(&view_, SIGNAL(sendCmuDataSignal()), this, SLOT(sendAllCmuData()));
     connect(&view_, SIGNAL(sendMpptDataSignal()), this, SLOT(sendAllMpptData()));
-    connect(&view_, SIGNAL(sendAllSignal()), this, SLOT(sendAll()));
 }

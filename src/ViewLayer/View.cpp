@@ -2,10 +2,11 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QLineEdit>
+#include <QDoubleSpinBox>
+#include <QCheckBox>
 #include <QComboBox>
 #include "View.h"
 #include "Window.h"
-#include "WindowDesign.h"
 
 namespace
 {
@@ -18,30 +19,58 @@ View::View()
 {
     window_ = new Window();
     connectToUi();
-    setUpWindowDesign();
-}
-
-void View::setUpWindowDesign()
-{
-    new WindowDesign();
 }
 
 void View::connectToUi()
 {
     window_->connect(&(window_->getConnectButton()), SIGNAL(clicked()),
                      this, SIGNAL(attemptConnectionSignal()));
-    window_->connect(&(window_->getSendKeyDriverControlButton()), SIGNAL(clicked()),
-                     this, SIGNAL(sendKeyDriverControlSignal()));
-    window_->connect(&(window_->getSendFaultsButton()), SIGNAL(clicked()),
-                     this, SIGNAL(sendFaultsSignal()));
-    window_->connect(&(window_->getSendBatteryDataButton()), SIGNAL(clicked()),
-                     this, SIGNAL(sendBatteryDataSignal()));
-    window_->connect(&(window_->getSendCmuDataButton()), SIGNAL(clicked()),
-                     this, SIGNAL(sendCmuDataSignal()));
-    window_->connect(&(window_->getSendMpptDataButton()), SIGNAL(clicked()),
-                     this, SIGNAL(sendMpptDataSignal()));
-    window_->connect(&(window_->getSendAllButton()), SIGNAL(clicked()),
-                     this, SIGNAL(sendAllSignal()));
+    window_->connect(&(window_->getSendButton()), SIGNAL(clicked()),
+                     this, SLOT(emitSendSignals()));
+    window_->connect(&(window_->getKeyDriverControlsSubmitButton()), SIGNAL(clicked()),
+                     this, SLOT(changeKeyDriverControlsData()));
+}
+
+void View::emitSendSignals()
+{
+    if(window_->getSendKeyDriverControlCheckBox().isChecked())
+    {
+        emit sendKeyDriverControlSignal();
+    }
+    if(window_->getSendDriverControlDetailsCheckBox().isChecked())
+    {
+        emit sendDriverControlDetailsSignal();
+    }
+    if(window_->getSendFaultsCheckBox().isChecked())
+    {
+        emit sendFaultsSignal();
+    }
+    if(window_->getSendBatteryDataCheckBox().isChecked())
+    {
+        emit sendBatteryDataSignal();
+    }
+    if(window_->getSendCmuDataCheckBox().isChecked())
+    {
+        emit sendCmuDataSignal();
+    }
+    if(window_->getSendMpptDataCheckBox().isChecked())
+    {
+        emit sendMpptDataSignal();
+    }
+}
+
+void View::changeKeyDriverControlsData()
+{
+    float driverSetSpeed = (float) window_->getDriverSetSpeedRpmSpinBox().value();
+    float driverSetCurrent = (float) window_->getDriverSetCurrentSpinBox().value();
+    float vehicleVelocity = (float) window_->getVehicleVelocitySpinBox().value();
+    float busCurrent = (float) window_->getBusCurrentSpinBox().value();
+    float busVoltage = (float) window_->getBusVoltageSpinBox().value();
+    emit changeKeyDriverControlsSignal(driverSetSpeed,
+                                       driverSetCurrent,
+                                       vehicleVelocity,
+                                       busCurrent,
+                                       busVoltage);
 }
 
 void View::setConnectionStatus(bool connectionStatus)

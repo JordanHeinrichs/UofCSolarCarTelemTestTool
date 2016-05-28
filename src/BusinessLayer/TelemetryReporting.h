@@ -8,7 +8,6 @@ class VehicleData;
 class SerialPortPeripheral;
 class QSerialPort;
 class View;
-class Window;
 
 class TelemetryReporting : public QObject
 {
@@ -26,7 +25,6 @@ private slots:
    void sendBatteryData();
    void sendAllCmuData();
    void sendAllMpptData();
-   void sendAll();
 
 private:
    // Will return length of framed data
