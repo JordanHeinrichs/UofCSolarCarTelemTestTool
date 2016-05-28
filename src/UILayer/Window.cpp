@@ -8,8 +8,6 @@
 #include <QLineEdit>
 #include <QComboBox>
 #include "Window.h"
-#include "TelemetryReporting.h"
-#include "SerialPortPeripheral.h"
 
 Window::Window()
 {

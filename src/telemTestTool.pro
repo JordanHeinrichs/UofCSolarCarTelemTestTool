@@ -22,6 +22,8 @@ HEADERS  += \
     UILayer/Window.h \
     ViewLayer/View.h \
     Peripherals/SerialPortPeripheral.h \
+    BusinessLayer/DataModifier.h \
+    UILayer/WindowDesign.h
 
 
 SOURCES += \
@@ -35,5 +37,10 @@ SOURCES += \
     UILayer/Window.cpp \
     ViewLayer/View.cpp \
     Peripherals/SerialPortPeripheral.cpp \
+    BusinessLayer/DataModifier.cpp \
+    UILayer/WindowDesign.cpp
 
 DISTFILES +=
+
+FORMS += \
+    UILayer/WindowDesign.ui

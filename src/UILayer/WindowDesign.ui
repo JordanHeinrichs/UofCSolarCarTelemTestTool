@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WindowDesign</class>
+ <widget class="QTabWidget" name="WindowDesign">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>345</width>
+    <height>413</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>TabWidget</string>
+  </property>
+  <property name="currentIndex">
+   <number>0</number>
+  </property>
+  <widget class="QWidget" name="main">
+   <attribute name="title">
+    <string>Tab 1</string>
+   </attribute>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>161</width>
+      <height>309</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLineEdit" name="comPortLineEdit">
+       <property name="text">
+        <string>/dev/ttyUSB0</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="constConnectionStatusLabel">
+       <property name="text">
+        <string>Connection Status:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="displayConnectionStatusLabel">
+       <property name="text">
+        <string>Not Connected.</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="connectButton">
+       <property name="text">
+        <string>Connect</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="sendKeyDriverControlCheckBox">
+       <property name="text">
+        <string>Key Driver Control</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="sendDriverControlDetailsCheckBox">
+       <property name="text">
+        <string>Driver Control Details</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="sendFaultsCheckBox">
+       <property name="text">
+        <string>Faults</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="sendBatteryDataCheckBox">
+       <property name="text">
+        <string>Battery Data</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="sendCmuDataCheckBox">
+       <property name="text">
+        <string>Cmu Data</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="sendMpptDataCheckBox">
+       <property name="text">
+        <string>Mppt Data</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="sendButton">
+       <property name="text">
+        <string>Send</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="KeyDriverControls">
+   <attribute name="title">
+    <string>Tab 2</string>
+   </attribute>
+   <widget class="QWidget" name="formLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>221</width>
+      <height>221</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="driverSetSpeedRpmLineEdit">
+       <property name="text">
+        <string>3.0f</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="constSetCurrentLabel">
+       <property name="text">
+        <string>Set Current (A):</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="driverSetCurrentLineEdit">
+       <property name="text">
+        <string>2.0f</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="constActualSpeedLabel">
+       <property name="text">
+        <string>Actual Speed (kph):</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="vehicleVelocityLineEdit">
+       <property name="text">
+        <string>7.0f</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="constBusCurrentLabel">
+       <property name="text">
+        <string>Bus Current (A):</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="busCurrentLineEdit">
+       <property name="text">
+        <string>5.0f</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="constBusVoltageLabel">
+       <property name="text">
+        <string>Bus Voltage (V):</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="busVoltageLineEdit">
+       <property name="text">
+        <string>6.0f</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="constSetSpeedLabel">
+       <property name="text">
+        <string>Set Speed (kph):</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QPushButton" name="keyDriverControlsSubmitButton">
+       <property name="text">
+        <string>Submit</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="DriverControlDetails">
+   <attribute name="title">
+    <string>Page</string>
+   </attribute>
+   <widget class="QWidget" name="formLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>271</width>
+      <height>260</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout_2">
+     <item row="0" column="0">
+      <widget class="QLabel" name="motorVelocityRpmLabel">
+       <property name="text">
+        <string>Motor Velocity (Rpm):</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="motorVelocityRpmLineEdit">
+       <property name="text">
+        <string>8.0f</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="motorVoltageRealLabel">
+       <property name="text">
+        <string>Actual Motor Voltage (V):</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="motorVoltageRealLineEdit">
+       <property name="text">
+        <string>11.0f</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="motorCurrentRealLabel">
+       <property name="text">
+        <string>Actual Motor Current (A):</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="motorCurrentRealLineEdit">
+       <property name="text">
+        <string>13.0f</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="backEmfImaginaryLabel">
+       <property name="text">
+        <string>Back EMF Imaginary:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="backEmfImaginaryLineEdit">
+       <property name="text">
+        <string>15.0f</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="dspBoardTempLabel">
+       <property name="text">
+        <string>DSP Board Temp:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="dspBoardTempLineEdit">
+       <property name="text">
+        <string>18.0f</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="dcBusAmpHoursLabel">
+       <property name="text">
+        <string>DC Bus AmpHours:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="dcBusAmpHoursLineEdit">
+       <property name="text">
+        <string>19.0f</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="odometerLabel">
+       <property name="text">
+        <string>Odometer:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QLineEdit" name="odometerLineEdit">
+       <property name="text">
+        <string>20.0f</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QPushButton" name="driverControlDetailsSubmitButton">
+       <property name="text">
+        <string>Submit</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="Faults">
+   <attribute name="title">
+    <string>Page</string>
+   </attribute>
+   <widget class="QWidget" name="formLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>321</width>
+      <height>362</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout_3">
+     <item row="1" column="0">
+      <widget class="QLabel" name="softwareOverCurrentLabel">
+       <property name="text">
+        <string>Software Over Current</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="softwareOverCurrentLineEdit"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="hardwareOverCurrentLabel">
+       <property name="text">
+        <string>HardwareOverCurrent</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="hardwareOverCurrentLineEdit"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_15">
+       <property name="text">
+        <string>Motor One Faults:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_16">
+       <property name="text">
+        <string>Motor Two Faults:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="softwareOverCurrentLabel_2">
+       <property name="text">
+        <string>SoftwareOverCurrent</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="softwareOverCurrentLineEdit_2"/>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="hardwareOverCurrentLabel_2">
+       <property name="text">
+        <string>HardwareOverCurrent</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="hardwareOverCurrentLineEdit_2"/>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_17">
+       <property name="text">
+        <string>Battery Faults:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="cellOverVoltageLabel">
+       <property name="text">
+        <string>Cell Over Voltage</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QLineEdit" name="cellOverVoltageLineEdit"/>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="cellUnderVoltageLabel">
+       <property name="text">
+        <string>CellUnderVoltage</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="QLineEdit" name="cellUnderVoltageLineEdit"/>
+     </item>
+     <item row="9" column="0">
+      <widget class="QLabel" name="cellOverTemperatureLabel">
+       <property name="text">
+        <string>Cell Over Temperature</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1">
+      <widget class="QLineEdit" name="cellOverTemperatureLineEdit"/>
+     </item>
+     <item row="10" column="0">
+      <widget class="QLabel" name="cMUCommunicationsTimeoutLabel">
+       <property name="text">
+        <string>CMU Communications Timeout</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1">
+      <widget class="QLineEdit" name="cMUCommunicationsTimeoutLineEdit"/>
+     </item>
+     <item row="11" column="1">
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="text">
+        <string>Submit</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="BatteryData">
+   <attribute name="title">
+    <string>Page</string>
+   </attribute>
+   <widget class="QWidget" name="formLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>301</width>
+      <height>331</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout_4">
+     <item row="0" column="0">
+      <widget class="QLabel" name="batteryCurrentALabel">
+       <property name="text">
+        <string>Battery Current (A)</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="batteryCurrentALineEdit"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="batteryVoltageVLabel">
+       <property name="text">
+        <string>Battery Voltage (V)</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="batteryVoltageVLineEdit"/>
+     </item>
+     <item row="2" column="1">
+      <widget class="QPushButton" name="pushButton_5">
+       <property name="text">
+        <string>Submit</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="CmuData">
+   <attribute name="title">
+    <string>Page</string>
+   </attribute>
+   <widget class="QWidget" name="formLayoutWidget_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>160</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout_5"/>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

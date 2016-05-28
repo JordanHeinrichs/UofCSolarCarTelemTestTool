@@ -22,6 +22,7 @@ public:
 private:
     void connectToUi();
     void connectTest();
+    void setUpWindowDesign();
 
 signals:
     void attemptConnectionSignal();
@@ -33,6 +34,7 @@ signals:
     void sendCmuDataSignal();
     void sendMpptDataSignal();
     void sendAllSignal();
+    void changeDataSignal();
 
 
 private:

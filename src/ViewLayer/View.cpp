@@ -5,6 +5,7 @@
 #include <QComboBox>
 #include "View.h"
 #include "Window.h"
+#include "WindowDesign.h"
 
 namespace
 {
@@ -17,8 +18,13 @@ View::View()
 {
     window_ = new Window();
     connectToUi();
+    setUpWindowDesign();
 }
 
+void View::setUpWindowDesign()
+{
+    new WindowDesign();
+}
 
 void View::connectToUi()
 {

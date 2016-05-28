@@ -5,8 +5,6 @@ class QPushButton;
 class QComboBox;
 class QLineEdit;
 class QLabel;
-class TelemetryReporting;
-class View;
 
 class Window : public QMainWindow
 {
