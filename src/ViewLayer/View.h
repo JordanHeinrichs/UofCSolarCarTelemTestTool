@@ -35,7 +35,7 @@ signals:
     void sendBatteryDataSignal();
     void sendCmuDataSignal();
     void sendMpptDataSignal();
-    void changeDataSignal(); //remove later
+    //void changeDataSignal(); //remove later
     void changeKeyDriverControlsSignal(float driverSetSpeed,
                                        float driverSetCurrent,
                                        float vehicleVelocity,
@@ -45,6 +45,7 @@ signals:
     //useless/to-be-removed
     void differentModeSelectedSignal();
     void sendAllSignal();
+    void changeDataSignal();
 
 
 private:

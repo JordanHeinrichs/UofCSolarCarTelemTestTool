@@ -38,7 +38,5 @@ SOURCES += \
     BusinessLayer/DataModifier.cpp \
     UILayer/Window.cpp
 
-DISTFILES +=
-
 FORMS += \
     UILayer/WindowDesign.ui

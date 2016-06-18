@@ -1,16 +1,14 @@
 #include "DataModifier.h"
 #include "View.h"
 #include "VehicleData.h"
-#include <iostream>
-using namespace std;
 
 /*  This class is a WIP, still unsure about what the data in VehicleData will end up
  *  looking like so for now it's just set up to connect properly between the
  *  View and the Data
  */
-DataModifier::DataModifier(View& view, VehicleData& vehicleData)
-:view_(view)
-,vehicleData_(vehicleData)
+DataModifier::DataModifier(VehicleData& vehicleData, View& view)
+: vehicleData_(vehicleData)
+,view_(view)
 {
     connectToView();
 }
@@ -23,7 +21,7 @@ void DataModifier::changeData()
 
 void DataModifier::changeKeyDriverControls(float driverSetSpeed, float driverSetCurrent, float vehicleVelocity, float busCurrent, float busVoltage)
 {
-    cout << "ahi" << endl; //TODO doesn't seem to be connected. No compilation errors though
+    //cout << "ahi" << endl; //TODO, doesn't seem to be connected. No compilation errors though
     vehicleData_.driverSetSpeedRpm = driverSetSpeed;
     vehicleData_.driverSetCurrent = driverSetCurrent;
     vehicleData_.vehicleVelocity = vehicleVelocity;

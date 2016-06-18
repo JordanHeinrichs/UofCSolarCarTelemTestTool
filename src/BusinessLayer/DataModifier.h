@@ -8,22 +8,20 @@ class VehicleData;
 class DataModifier : public QObject
 {
 public:
-    DataModifier(View& view, VehicleData& vehicleData);
+    DataModifier(VehicleData& vehicleData, View& view);
 
 private:
-    void connectToView();
-
-private slots:
     void changeData();
     void changeKeyDriverControls(float driverSetSpeed,
-                                 float driverSetCurrent,
-                                 float vehicleVelocity,
-                                 float busCurrent,
-                                 float busVoltage);
+                            float driverSetCurrent,
+                            float vehicleVelocity,
+                            float busCurrent,
+                            float busVoltage);
+    void connectToView();
 
 private:
-    View& view_;
     VehicleData& vehicleData_;
+    View& view_;
 };
 
 #endif // DATAMODIFIER_H
