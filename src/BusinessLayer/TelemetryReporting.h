@@ -3,21 +3,28 @@
    By Jordan Heinrichs for the Solar Car Team
    Copyright (c) 2015 by University of Calgary Solar Car Team
 -------------------------------------------------------*/
-class QIODevice;
+#include <QObject>
 class VehicleData;
+class SerialPortPeripheral;
+class QSerialPort;
+class View;
 
-class TelemetryReporting
+class TelemetryReporting : public QObject
 {
+    Q_OBJECT
 public:
-   TelemetryReporting(QIODevice& device,
-                      VehicleData& vehicleData);
+   TelemetryReporting(SerialPortPeripheral& peripheral,
+                      VehicleData& vehicleData,
+                      View& view);
 
+private slots:
+   void attemptConnection();
    void sendKeyDriverControlTelemetry();
    void sendDriverControlDetails();
    void sendFaults();
    void sendBatteryData();
-   void sendCmuData(unsigned char cmuDataIndex);
-   void sendMpptData(unsigned char mpptDataIndex);
+   void sendAllCmuData();
+   void sendAllMpptData();
 
 private:
    // Will return length of framed data
@@ -31,8 +38,12 @@ private:
 
    void writeFloatIntoData(unsigned char* data, int index, const float& value);
    void sendData(const unsigned char* data, int length);
+   void connectToView();
+   void sendCmuData(unsigned char cmuDataIndex);
+   void sendMpptData(unsigned char mpptDataIndex);
 
 private:
-   QIODevice& outputDevice_;
+   SerialPortPeripheral& serialPortPeripheral_;
    VehicleData& vehicleData_;
+   View& view_;
 };

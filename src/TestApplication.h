@@ -5,7 +5,8 @@
 #include <QSerialPort>
 #include "TelemetryReporting.h"
 #include "VehicleData.h"
-#include "Window.h"
+#include "View.h"
+#include "SerialPortPeripheral.h"
 
 class TestApplication : public QApplication
 {
@@ -16,7 +17,8 @@ public:
 
 private:
    QScopedPointer<QSerialPort> serialPort_;
+   QScopedPointer<SerialPortPeripheral> serialPortPeripheral_;
    QScopedPointer<VehicleData> vehicleData_;
+   QScopedPointer<View> view_;
    QScopedPointer<TelemetryReporting> telemetryReporting_;
-   QScopedPointer<Window> window_;
 };

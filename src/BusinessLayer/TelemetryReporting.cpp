@@ -3,11 +3,13 @@
    Copyright (c) 2015 by University of Calgary Solar Car Team
 -------------------------------------------------------*/
 
-#include <QIODevice>
+#include <QSerialPort>
 #include <CcsDefines.h>
 #include <CrcCalculator.h>
 #include <TelemetryReporting.h>
 #include <VehicleData.h>
+#include <SerialPortPeripheral.h>
+#include <View.h>
 
 union FloatDataUnion
 {
@@ -36,13 +38,19 @@ namespace
    const unsigned char BATTERY_DATA_ID = 0x04;
    const unsigned char CMU_DATA_ID = 0x05;
    const unsigned char MPPT_DATA_ID = 0x06;
+
+   const int NUMBER_OF_CMUS = 4;
+   const int NUMBER_OF_MPPTS = 7;
 }
 
-TelemetryReporting::TelemetryReporting(QIODevice& device,
-                                       VehicleData& vehicleData)
-: outputDevice_(device)
+TelemetryReporting::TelemetryReporting(SerialPortPeripheral& peripheral,
+                                       VehicleData& vehicleData,
+                                       View& view)
+: serialPortPeripheral_(peripheral)
 , vehicleData_(vehicleData)
+, view_(view)
 {
+    connectToView();
 }
 
 void TelemetryReporting::sendKeyDriverControlTelemetry()
@@ -60,7 +68,7 @@ void TelemetryReporting::sendKeyDriverControlTelemetry()
    addChecksum(packetPayload, KEY_DRIVER_CONTROL_LENGTH);
    unsigned char packet[unframedPacketLength + FRAMING_LENGTH_INCREASE];
    unsigned int packetLength = frameData(packetPayload, unframedPacketLength, packet);
-   sendData(packet, packetLength);
+   serialPortPeripheral_.sendData(packet, packetLength);
 }
 
 void TelemetryReporting::sendDriverControlDetails()
@@ -79,7 +87,7 @@ void TelemetryReporting::sendDriverControlDetails()
    addChecksum(packetPayload, DRIVER_CONTROL_DETAILS_LENGTH);
    unsigned char packet[unframedPacketLength + FRAMING_LENGTH_INCREASE];
    unsigned int packetLength = frameData(packetPayload, unframedPacketLength, packet);
-   sendData(packet, packetLength);
+   serialPortPeripheral_.sendData(packet, packetLength);
 }
 
 void TelemetryReporting::sendFaults()
@@ -99,7 +107,7 @@ void TelemetryReporting::sendFaults()
    addChecksum(packetPayload, FAULT_LENGTH);
    unsigned char packet[unframedPacketLength + FRAMING_LENGTH_INCREASE];
    unsigned int packetLength = frameData(packetPayload, unframedPacketLength, packet);
-   sendData(packet, packetLength);
+   serialPortPeripheral_.sendData(packet, packetLength);
 }
 
 void TelemetryReporting::sendBatteryData()
@@ -116,7 +124,15 @@ void TelemetryReporting::sendBatteryData()
    addChecksum(packetPayload, BATTERY_DATA_LENGTH);
    unsigned char packet[unframedPacketLength + FRAMING_LENGTH_INCREASE];
    unsigned int packetLength = frameData(packetPayload, unframedPacketLength, packet);
-   sendData(packet, packetLength);
+   serialPortPeripheral_.sendData(packet, packetLength);
+}
+
+void TelemetryReporting::sendAllCmuData()
+{
+    for (int i = 0; i < NUMBER_OF_CMUS; ++i)
+    {
+       sendCmuData(i);
+    }
 }
 
 void TelemetryReporting::sendCmuData(unsigned char cmuDataIndex)
@@ -139,7 +155,7 @@ void TelemetryReporting::sendCmuData(unsigned char cmuDataIndex)
    addChecksum(packetPayload, CMU_DATA_LENGTH);
    unsigned char packet[unframedPacketLength + FRAMING_LENGTH_INCREASE];
    unsigned int packetLength = frameData(packetPayload, unframedPacketLength, packet);
-   sendData(packet, packetLength);
+   serialPortPeripheral_.sendData(packet, packetLength);
 }
 
 void TelemetryReporting::sendMpptData(unsigned char mpptDataIndex)
@@ -167,7 +183,7 @@ void TelemetryReporting::sendMpptData(unsigned char mpptDataIndex)
    addChecksum(packetPayload, MPPT_DATA_LENGTH);
    unsigned char packet[unframedPacketLength + FRAMING_LENGTH_INCREASE];
    unsigned int packetLength = frameData(packetPayload, unframedPacketLength, packet);
-   sendData(packet, packetLength);
+   serialPortPeripheral_.sendData(packet, packetLength);
 }
 
 unsigned int TelemetryReporting::frameData(const unsigned char* dataToEncode,
@@ -234,10 +250,27 @@ void TelemetryReporting::writeFloatIntoData(unsigned char* data, int index, cons
    data[index] = floatDataUnion.charData[3];
 }
 
-void TelemetryReporting::sendData(const unsigned char* data, int length)
+void TelemetryReporting::attemptConnection()
 {
-   for (int i = 0; i < length; ++i)
-   {
-      outputDevice_.putChar(data[i]);
-   }
+    serialPortPeripheral_.setPortName(view_.getCommunicationPort());
+    view_.setConnectionStatus(serialPortPeripheral_.attemptConnection());
+}
+
+void TelemetryReporting::sendAllMpptData()
+{
+    for (int i = 0; i < NUMBER_OF_MPPTS; ++i)
+    {
+       sendMpptData(i);
+    }
+}
+
+void TelemetryReporting::connectToView()
+{
+    connect(&view_, SIGNAL(attemptConnectionSignal()), this, SLOT(attemptConnection()));
+    connect(&view_, SIGNAL(sendKeyDriverControlSignal()), this, SLOT(sendKeyDriverControlTelemetry()));
+    connect(&view_, SIGNAL(sendDriverControlDetailsSignal()), this, SLOT(sendDriverControlDetails()));
+    connect(&view_, SIGNAL(sendFaultsSignal()), this, SLOT(sendFaults()));
+    connect(&view_, SIGNAL(sendBatteryDataSignal()), this, SLOT(sendBatteryData()));
+    connect(&view_, SIGNAL(sendCmuDataSignal()), this, SLOT(sendAllCmuData()));
+    connect(&view_, SIGNAL(sendMpptDataSignal()), this, SLOT(sendAllMpptData()));
 }
