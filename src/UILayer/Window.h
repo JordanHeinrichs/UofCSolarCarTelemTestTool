@@ -3,6 +3,7 @@
 //#include <QMainWindow>
 //#include <QWidget>
 #include <QTabWidget>
+
 class QPushButton;
 class QComboBox;
 class QLineEdit;
@@ -20,6 +21,7 @@ class Window : public QTabWidget
 public:
     explicit Window();
     ~Window();
+    //Change to QScopedPointers later
     QPushButton& getConnectButton();
     QPushButton& getSendButton();
     QPushButton& getKeyDriverControlsSubmitButton();

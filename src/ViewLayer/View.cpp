@@ -1,4 +1,3 @@
-#include <QDebug>
 #include <QLabel>
 #include <QPushButton>
 #include <QLineEdit>
@@ -66,6 +65,7 @@ void View::changeKeyDriverControlsData()
     float vehicleVelocity = (float) window_->getVehicleVelocitySpinBox().value();
     float busCurrent = (float) window_->getBusCurrentSpinBox().value();
     float busVoltage = (float) window_->getBusVoltageSpinBox().value();
+
     emit changeKeyDriverControlsSignal(driverSetSpeed,
                                        driverSetCurrent,
                                        vehicleVelocity,
@@ -77,7 +77,7 @@ void View::setConnectionStatus(bool connectionStatus)
 {
     if(connectionStatus)
     {
-        window_->getConnectionStatusLabel().setText("Connected.");
+        window_->getConnectionStatusLabel().setText("Connected");
     }
     else
     {

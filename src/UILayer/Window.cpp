@@ -1,3 +1,12 @@
+#include <QString>
+#include <QVBoxLayout>
+#include <QFormLayout>
+#include <QLabel>
+#include <QPushButton>
+#include <QSerialPort>
+#include <QLineEdit>
+#include <QComboBox>
+#include <QScopedPointer>
 #include "Window.h"
 #include "ui_WindowDesign.h"
 

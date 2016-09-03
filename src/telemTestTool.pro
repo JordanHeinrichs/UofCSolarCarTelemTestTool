@@ -15,27 +15,29 @@ HEADERS  += \
     TestApplication.h \
     BusinessLayer/CrcCalculator.h \
     BusinessLayer/TelemetryReporting.h \
+    BusinessLayer/CommunicationService.h \
+    BusinessLayer/DataModifier.h \
     DataLayer/CcsDefines.h \
     DataLayer/CmuData.h \
     DataLayer/MpptData.h \
     DataLayer/VehicleData.h \
-    ViewLayer/View.h \
     Peripherals/SerialPortPeripheral.h \
-    BusinessLayer/DataModifier.h \
+    Peripherals/I_CommPeripheral.h \
+    ViewLayer/View.h \
     UILayer/Window.h
-
 
 SOURCES += \
     main.cpp \
     TestApplication.cpp \
     BusinessLayer/CrcCalculator.cpp \
     BusinessLayer/TelemetryReporting.cpp \
+    BusinessLayer/CommunicationService.cpp \
+    BusinessLayer/DataModifier.cpp \
     DataLayer/CmuData.cpp \
     DataLayer/MpptData.cpp \
     DataLayer/VehicleData.cpp \
-    ViewLayer/View.cpp \
     Peripherals/SerialPortPeripheral.cpp \
-    BusinessLayer/DataModifier.cpp \
+    ViewLayer/View.cpp \
     UILayer/Window.cpp
 
 FORMS += \

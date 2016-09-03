@@ -1,7 +1,7 @@
-#ifndef VIEW_H
-#define VIEW_H
+#pragma once
 
 #include <QObject>
+
 class QSerialPort;
 class Window;
 class QPushButton;
@@ -51,5 +51,3 @@ signals:
 private:
     Window* window_;
 };
-
-#endif // VIEW_H

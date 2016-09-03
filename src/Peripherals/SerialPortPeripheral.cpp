@@ -1,25 +1,28 @@
 #include "SerialPortPeripheral.h"
 #include <QSerialPort>
-#include <QString>
+#include <QStringList>
 
-/*
- *
- */
 namespace
 {
     const int BAUDRATE = 9600;
     const int NUMBER_OF_CMUS = 4;
     const int NUMBER_OF_MPPTS = 7;
 }
+
 SerialPortPeripheral::SerialPortPeripheral(QSerialPort& serialPort)
 : serialPort_(serialPort)
 {
     serialPort_.setBaudRate(BAUDRATE);
 }
 
-void SerialPortPeripheral::setPortName(QString portName)
+
+SerialPortPeripheral::~SerialPortPeripheral()
 {
-    serialPort_.setPortName(portName);
+}
+
+void SerialPortPeripheral::setParameters(QStringList parameters)
+{
+    serialPort_.setPortName(parameters.at(0));
 }
 
 void SerialPortPeripheral::sendData(const unsigned char* data, int length)
