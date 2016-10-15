@@ -2,7 +2,7 @@
     error( "Couldn't find the common.pri file!" )
 }
 
-QT += widgets
+QT += widgets serialport
 TEMPLATE = app
 TARGET = telemTestApp
 INCLUDEPATH = BusinessLayer \
