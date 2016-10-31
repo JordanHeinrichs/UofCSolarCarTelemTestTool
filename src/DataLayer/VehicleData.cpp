@@ -3,7 +3,7 @@
    Copyright (c) 2015 by University of Calgary Solar Car Team
 -------------------------------------------------------*/
 
-#include <VehicleData.h>
+#include "VehicleData.h"
 
 VehicleData::VehicleData()
 : reportedMotorCurrent(1.0f)

@@ -3,7 +3,7 @@
    Copyright (c) 2014 by University of Calgary Solar Car Team
 -------------------------------------------------------*/
 
-#include <CmuData.h>
+#include "CmuData.h"
 
 CmuData::CmuData()
 {

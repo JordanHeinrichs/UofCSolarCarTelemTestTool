@@ -2,8 +2,9 @@
 #include "View.h"
 #include "I_CommPeripheral.h"
 #include "SerialPortPeripheral.h"
-#include "QIODevice"
-#include "QSerialPort"
+#include  <QIODevice>
+#include  <QSerialPort>
+#include  <QStringList>
 
 /*--------------------------------------------------------
                 Communication Service
