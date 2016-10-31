@@ -4,12 +4,12 @@
 -------------------------------------------------------*/
 
 #include <QIODevice>
-#include "CcsDefines.h"
-#include "CrcCalculator.h"
-#include "TelemetryReporting.h"
-#include "VehicleData.h"
-#include "CommunicationService.h"
-#include "View.h"
+#include <CcsDefines.h>
+#include <CrcCalculator.h>
+#include <TelemetryReporting.h>
+#include <VehicleData.h>
+#include <CommunicationService.h>
+#include <View.h>
 
 union FloatDataUnion
 {
