@@ -1,3 +1,6 @@
+INCLUDEPATH += .
+QT+=widgets serialport
+
 CONFIG += c++11 debug
 
 !win32 {
